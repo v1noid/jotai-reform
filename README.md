@@ -23,13 +23,13 @@ Do you have any idea what this code is about? Me neither! But I wrote that. Now 
 Great, now I know it's being used to close the modal. But wait, what about reusability like reducers or like we do in Zustand? What is i need to use this same functionality in multiple components?
 
 ```javascript
-// example in jotai
+// example in zustand
 const useStore = create((set) => ({
   count: 1,
   closeModal: () => set((state) => ({ ...state, open: false })),
 }))
 
-// no need to redefine the closeModal and it increased readability
+// no need to redefine the closeModal and also it increased readability
 ```
 
 Now Jotai doesn't give us this out of the box. Well, that's why you need to start using `jotai-reform` from now on. `jotai-reform` provides you multiple benefits of using Jotai with ease.
