@@ -1,10 +1,11 @@
 {
   "name": "jotai-reform",
-  "module": "./index.tsx",
+  "main": "./dist/index.cjs",
+  "module": "./dist/index.js",
+  "types": "./dist/index.d.ts",
   "type": "module",
   "private": true,
   "scripts": {
-    "dev": "bun run --watch index.tsx",
     "build": "tsup"
   },
   "devDependencies": {
