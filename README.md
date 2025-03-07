@@ -6,7 +6,7 @@ Jotai in itself is an awesome state manager with the convenience of using atoms 
 
 Here are a few common issues with Jotai I face in my projects:
 
-1. Bad code management. Because of the simple approach of using atom and useAtom hook, Jotai made it easy to mutate a state but soon in larger projects, devs start to lose track of their code. Look at this simple code example:
+Bad code management. Because of the simple approach of using atom and useAtom hook, Jotai made it easy to mutate a state but soon in larger projects, devs start to lose track of their code. Look at this simple code example:
 ```javascript
   const [result, setResult] = useAtom(resultAtom)
 
