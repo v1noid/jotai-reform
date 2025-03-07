@@ -20,34 +20,48 @@ Do you have any idea what this code is about? Me neither! But I wrote that. Now 
   }
 ```
 
-Great, now I know it's being used to close the modal. But wait, what about reusability like reducers or like we do in Zustand?
+Great, now I know it's being used to close the modal. But wait, what about reusability like reducers or like we do in Zustand? What is i need to use this same functionality in multiple components?
 
 ```javascript
+// example in jotai
 const useStore = create((set) => ({
   count: 1,
   closeModal: () => set((state) => ({ ...state, open: false })),
 }))
+
+// no need to redefine the closeModal and it increased readability
 ```
 
 Now Jotai doesn't give us this out of the box. Well, that's why you need to start using `jotai-reform` from now on. `jotai-reform` provides you multiple benefits of using Jotai with ease.
 
 Let's see some of the functions of `jotai-reform`:
-
-## createStore
-`createStore` is a wrapper around atom:
+## Initialization
 ```javascript
-    const [useStore, storeAtom] = createStore(initialState, (set, states, get) => ({...methods}));
+// wrap your application with provider from `jotai-reform`
+
+<Provider>
+    <App />
+</Provider>
+
+// it's next js compatible as well
 ```
-`createStore` has 2 arguments: 1st is your initialState, 2nd is your methods.
+
+
+## createAtom
+`createAtom` is a wrapper around atom:
+```javascript
+    const [useStore, storeAtom] = createAtom(initialState, (set, states, get) => ({...methods}));
+```
+`createAtom` has 2 arguments: 1st is your initialState, 2nd is your methods.
 
 #### What are methods?
-Methods are like reducers to perform any actions in your store.
+Methods are like reducers to perform any actions in your store. like in the prev examples `increment` is a method
 
-### Return type of `createStore`
-`createStore` returns an array with 2 elements:
+### Return type of `createAtom`
+`createAtom` returns an array with 2 elements:
 
 ```javascript
-const [useStore, storeAtom] = createStore(initialState, (set, states, get) => ({
+const [useStore, storeAtom] = createAtom(initialState, (set, states, get) => ({
   increment() {
     set({ count: states.count + 1 });
   },
@@ -57,7 +71,7 @@ const [useStore, storeAtom] = createStore(initialState, (set, states, get) => ({
 Let's see it in action:
 
 ```javascript
-const [useStore, storeAtom] = createStore({ count: 0 }, (set, states, get) => ({
+const [useStore, storeAtom] = createAtom({ count: 0 }, (set, states, get) => ({
   increment() {
     set({ count: states.count + 1 });
   },
@@ -88,13 +102,13 @@ resetStore()
 
 ### Using methods in `jotai-reform`
 ```javascript
-// in createStore you have to pass your methods to the callback function
+// in createAtom you have to pass your methods to the callback function
 
-createStore({count: 0}, (set, states, get) => ({}))
+createAtom({count: 0}, (set, states, get) => ({}))
 
-// this callback should return an object with methods
+// in this callback you will return an object with methods
 
-createStore({count: 0}, (set, states, get) => ({
+createAtom({count: 0}, (set, states, get) => ({
     increment: () => set({count: 1}) // use set to update the state
 }))
 
@@ -102,24 +116,24 @@ createStore({count: 0}, (set, states, get) => ({
 // so the new value will be {count: 1}; if you had another value in that object, it will be removed
 
 //Example
-createStore({count1: 0, count2: 0}, (set, states, get) => ({
+createAtom({count1: 0, count2: 0}, (set, states, get) => ({
     increment: () => set({count1: 1}) // new store value {count1: 1} (count2 is removed)
 }))
 
 // to fix this issue you can pass the states to the set function
 
 //Example
-createStore({count1: 0, count2: 0}, (set, states, get) => ({
+createAtom({count1: 0, count2: 0}, (set, states, get) => ({
     increment: () => set({...states, count1: 1}) // new store value {count1: 1, count2: 0}
 }))
 
-// the states parameter gives you all the current states of that store
+// the states parameter gives you all the current states of that store `states.count`
 
 // use of `get`
 // Now sometimes you need a value from another store/atom; for that, you can use the get function
 
 //Example 
-createStore({count1: 0, count2: 0}, (set, states, get) => ({
+createAtom({count1: 0, count2: 0}, (set, states, get) => ({
     increment: () => set({...states, count1: get(anotherStoreAtom).anyValueFromThatStore}) 
 }))
 ```

@@ -20,7 +20,7 @@ export type UseAtom<T, M> = [
 
 export const statesSet = new Set<StoreAtom<any>>();
 
-export const createStore = <TInitial = {}, TMethods = {}>(
+export const createAtom = <TInitial = {}, TMethods = {}>(
   initial: TInitial,
   methods: (
     set: (newValue: Partial<TInitial>) => void,

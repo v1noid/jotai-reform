@@ -1,3 +1,4 @@
+"use client";
 import { createStore } from "jotai";
 import type { PropsWithChildren } from "react";
 import { Provider as JotaiProvider } from "jotai/react";
