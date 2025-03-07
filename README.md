@@ -39,11 +39,25 @@ Let's see some of the functions of `jotai-reform`:
 ```javascript
 // wrap your application with provider from `jotai-reform`
 
-<Provider>
-    <App />
+import { createStore } from "jotai";
+import { Provider } from "jotai";
+const store = createStore();
+
+<Provider store={store}>
+  <App />
 </Provider>
 
-// it's next js compatible as well
+// using with next js 
+"use client ";
+
+import { createStore, Provider } from "jotai";
+import React, { PropsWithChildren } from "react";
+
+const store = createStore();
+
+export default function JotaiProvider(props: PropsWithChildren) {
+  return <Provider store={store}>{props.children}</Provider>;
+}
 ```
 
 

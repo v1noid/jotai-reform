@@ -4,7 +4,7 @@
   "module": "./dist/index.mjs",
   "types": "./dist/index.d.ts",
   "type": "commonjs",
-  "version": "1.0.2",
+  "version": "1.0.4",
   "private": false,
   "description": "👻 Jotai with infinity gauntlet",
   "scripts": {
@@ -39,5 +39,15 @@
   "license": "MIT",
   "author": "sirarifarid",
   "homepage": "https://github.com/sirarifarid/jotai-reform",
-  "repository": "https://github.com/sirarifarid/jotai-reform"
+  "repository": "https://github.com/sirarifarid/jotai-reform",
+  "exports": {
+    ".": {
+      "import": "./dist/index.js",
+      "types": "./dist/index.d.ts"
+    },
+    "./provider": {
+      "import": "./dist/provider.js",
+      "types": "./dist/provider.d.ts"
+    }
+  }
 }
