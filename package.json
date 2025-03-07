@@ -1,0 +1,25 @@
+{
+  "name": "jotai-reform",
+  "module": "./index.tsx",
+  "type": "module",
+  "private": true,
+  "scripts": {
+    "dev": "bun run --watch index.tsx",
+    "build": "tsup"
+  },
+  "devDependencies": {
+    "@eslint/js": "^9.21.0",
+    "@types/bun": "latest",
+    "@types/react": "^19.0.10",
+    "@types/react-dom": "^19.0.4",
+    "eslint": "^9.21.0",
+    "eslint-plugin-react-hooks": "^5.2.0",
+    "eslint-plugin-react-refresh": "^0.4.19",
+    "tsup": "^8.4.0"
+  },
+  "peerDependencies": {
+    "jotai": "^2.12.1",
+    "react": "^19.0.0",
+    "typescript": "^5"
+  }
+}
