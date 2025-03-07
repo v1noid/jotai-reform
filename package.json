@@ -38,5 +38,6 @@
   ],
   "license": "MIT",
   "author": "sirarifarid",
-  "homepage": "https://github.com/sirarifarid/jotai-reform"
+  "homepage": "https://github.com/sirarifarid/jotai-reform",
+  "repository": "https://github.com/sirarifarid/jotai-reform"
 }
