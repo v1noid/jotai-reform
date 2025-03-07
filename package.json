@@ -6,6 +6,7 @@
   "type": "commonjs",
   "version": "1.0.0",
   "private": false,
+  "description": "👻 Jotai with infinity gauntlet",
   "scripts": {
     "build": "tsup"
   },
@@ -34,5 +35,8 @@
     "jotai",
     "reform",
     "zustand"
-  ]
+  ],
+  "license": "MIT",
+  "author": "sirarifarid",
+  "homepage": "https://github.com/sirarifarid/jotai-reform"
 }
