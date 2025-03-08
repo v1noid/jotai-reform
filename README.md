@@ -48,7 +48,7 @@ const store = createStore();
 </Provider>
 
 // using with next js 
-"use client ";
+"use client";
 
 import { createStore, Provider } from "jotai";
 import React, { PropsWithChildren } from "react";

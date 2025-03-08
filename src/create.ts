@@ -22,7 +22,7 @@ export const statesSet = new Set<StoreAtom<any>>();
 
 export const createAtom = <TInitial = {}, TMethods = {}>(
   initial: TInitial,
-  methods: (
+  methods?: (
     set: (newValue: Partial<TInitial>) => void,
     states: TInitial,
     get: <T>(atom: Atom<T>) => T
@@ -39,11 +39,11 @@ export const createAtom = <TInitial = {}, TMethods = {}>(
       setStates(newValue as TInitial);
     const get = <T>(atom: Atom<T>) => store.get<T>(atom);
 
-    const methodsObj = methods(set, states, get);
+    const methodsObj = methods?.(set, states, get);
 
     const reset = () => setStates(storeAtom.init);
 
-    return [states, methodsObj, setStates, reset];
+    return [states, methodsObj || ({} as any), setStates, reset];
   }
 
   return [useAtom, storeAtom];
