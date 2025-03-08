@@ -4,7 +4,7 @@
   "module": "./dist/index.mjs",
   "types": "./dist/index.d.ts",
   "type": "commonjs",
-  "version": "1.0.10",
+  "version": "1.0.12",
   "private": false,
   "description": "👻 Jotai with infinity gauntlet",
   "scripts": {
