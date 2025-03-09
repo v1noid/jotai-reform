@@ -1,7 +1,6 @@
 {
   "name": "jotai-reform",
   "main": "./dist/index.js",
-  "module": "./dist/index.mjs",
   "types": "./dist/index.d.ts",
   "type": "commonjs",
   "version": "1.0.12",
@@ -13,11 +12,14 @@
   "devDependencies": {
     "@eslint/js": "^9.21.0",
     "@types/bun": "latest",
+    "@types/fs-extra": "^11.0.4",
     "@types/react": "^19.0.10",
     "@types/react-dom": "^19.0.4",
+    "chokidar": "^4.0.3",
     "eslint": "^9.21.0",
     "eslint-plugin-react-hooks": "^5.2.0",
     "eslint-plugin-react-refresh": "^0.4.19",
+    "fs-extra": "^11.3.0",
     "tsup": "^8.4.0"
   },
   "peerDependencies": {

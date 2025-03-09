@@ -15,12 +15,14 @@ export function useResetAtoms() {
   const store = useStore();
   return (config?: UseResetAtomsProps) => {
     const { ignoreAtoms, resetAtoms } = config || {};
-    const ignoreAtomsName = ignoreAtoms?.map((atom) => atom.debugLabel);
+    const ignoreAtomsName = ignoreAtoms?.map(
+      (atom) => (atom as any).reformName
+    );
     if (resetAtoms?.length)
       for (const atom of resetAtoms) store.set(atom, atom.init);
     else
       for (const atom of statesSet)
-        if (!ignoreAtomsName?.includes(atom.debugLabel))
+        if (!ignoreAtomsName?.includes((atom as any).reformName))
           store.set(atom, atom.init);
   };
 }
