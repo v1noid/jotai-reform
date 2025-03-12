@@ -35,15 +35,18 @@ export const createAtom = <TInitial, TMethods>(
     const [states, setStates] = useJotaiAtom(storeAtom);
     const store = useStore();
 
-    const set = (newValue: Partial<TInitial>) =>
-      setStates(newValue as TInitial);
-    const get = <T>(atom: Atom<T>) => store.get<T>(atom);
+    const methodsObj = methods?.(
+      (newValue: Partial<TInitial>) => setStates(newValue as TInitial),
+      states,
+      <T>(atom: Atom<T>) => store.get<T>(atom)
+    );
 
-    const methodsObj = methods?.(set, states, get);
-
-    const reset = () => setStates(storeAtom.init);
-
-    return [states, methodsObj || ({} as any), setStates, reset];
+    return [
+      states,
+      methodsObj || ({} as any),
+      setStates,
+      () => setStates(storeAtom.init),
+    ];
   }
 
   return [useAtom, storeAtom];
