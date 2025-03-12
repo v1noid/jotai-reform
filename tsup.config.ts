@@ -9,16 +9,17 @@ process.on("beforeExit", async () => {
 });
 
 export default defineConfig({
-  format: ["esm"],
+  format: ["cjs", "esm"],
   entry: ["./src/index.ts"],
   dts: true,
   clean: true,
   external: ["react", "jotai"],
   outDir: "./dist",
-  skipNodeModulesBundle: true,
   treeshake: true,
+  skipNodeModulesBundle: true,
   minify: true,
   minifySyntax: true,
   minifyWhitespace: true,
+
   // watch: true,
 });

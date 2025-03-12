@@ -5,3 +5,6 @@ tsconfig.json
 tsup.config.ts
 eslint.config.js
 bun.lock
+/test
+.gitignore
+.npmignore

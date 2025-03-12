@@ -1,9 +1,10 @@
 {
   "name": "jotai-reform",
   "main": "./dist/index.js",
+  "module": "./dist/index.js",
   "types": "./dist/index.d.ts",
   "type": "commonjs",
-  "version": "1.0.12",
+  "version": "1.0.13",
   "private": false,
   "description": "👻 Jotai with infinity gauntlet",
   "scripts": {
@@ -46,10 +47,9 @@
     ".": {
       "import": "./dist/index.js",
       "types": "./dist/index.d.ts"
-    },
-    "./provider": {
-      "import": "./dist/provider.js",
-      "types": "./dist/provider.d.ts"
     }
+  },
+  "dependencies": {
+    "bun-plugin-dts": "^0.3.0"
   }
 }

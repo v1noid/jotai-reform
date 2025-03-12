@@ -30,7 +30,7 @@ export const createAtom = <TInitial, TMethods>(
 ): [() => UseAtom<TInitial, TMethods>, StoreAtom<TInitial>] => {
   const storeAtom = atom(initial);
   statesSet.add(storeAtom);
-  storeAtom.debugLabel = "store-" + statesSet.size;
+  (storeAtom as any).reformName = "store-" + statesSet.size;
   function useAtom(): UseAtom<TInitial, TMethods> {
     const [states, setStates] = useJotaiAtom(storeAtom);
     const store = useStore();
