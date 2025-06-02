@@ -1,37 +1,63 @@
 "use client";
 
-import { createAtom } from "jotai-reform";
+import { atom } from "jotai";
 import { useAtom } from "jotai/react";
-import { useHydrateAtoms } from "jotai/utils";
-import { useEffect } from "react";
+import { useRef } from "react";
 
-const [useAtom_, aom] = createAtom({ count: 0 }, (set) => ({
-  inc: () => set({ count: 100 }),
-}));
+const at = atom({ count1: 0, count2: 0 });
 
 export default function Home() {
-  useHydrateAtoms([[aom, { count: 300 }]]);
+  const [st, setSt] = useAtom(at);
 
-  const [count_, methods, setA] = useAtom_();
-  const [count, setAtom] = useAtom(aom);
-  // using import in dist/index.js gives {count:1000} {count:1000} which is correct but if i use require() it gives {count:100} {count:1000} which is wrong why is that
-  console.log(count, count_);
-  useEffect(() => {
-    setAtom({ count: 100 });
-    setA({ count: 1000 });
-    return () => {};
-  }, [setAtom]);
+  const ref = useRef(0);
 
+  ref.current++;
+
+  console.log(ref.current, "app");
   return (
     <>
-      <Comp />
+      <Cmp1 />
+      <Cmp2 />
     </>
   );
 }
 
-function Comp() {
-  const [count_] = useAtom_();
-  const [count] = useAtom(aom);
-  console.log("comp", count, count_);
-  return <></>;
+function Cmp1() {
+  const [state, setSt] = useAtom(at);
+
+  const ref = useRef(0);
+
+  ref.current++;
+
+  console.log(ref.current, "cm 1");
+
+  return (
+    <div className="card">
+      <button onClick={() => setSt((p) => ({ ...p, count1: p.count1 + 1 }))}>
+        count is {state.count1}
+      </button>
+      <p>
+        Edit <code>src/App.tsx</code> and save to test HMR
+      </p>
+    </div>
+  );
+}
+function Cmp2() {
+  const [state, setSt] = useAtom(at);
+
+  const ref = useRef(0);
+  ref.current++;
+
+  console.log(ref.current, "cm 2");
+
+  return (
+    <div className="card">
+      <button onClick={() => setSt((p) => ({ ...p, count2: p.count2 + 1 }))}>
+        count is {state.count2}
+      </button>
+      <p>
+        Edit <code>src/App.tsx</code> and save to test HMR
+      </p>
+    </div>
+  );
 }

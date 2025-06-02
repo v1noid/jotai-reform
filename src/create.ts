@@ -10,12 +10,12 @@ type SetAtom<Args extends unknown[], Result> = <A extends Args>(
   ...args: A
 ) => Result;
 
-export type StoreAtom<T> = PrimitiveAtom<T> & WithInitialValue<T>;
+export type StoreAtom<T> = PrimitiveAtom<T> & WithInitialValue<T> & {initialValue:T};
 export type UseAtom<T, M> = [
   Awaited<T>,
   M,
   SetAtom<[SetStateAction<T>], void>,
-  () => void
+  () => void,
 ];
 
 export const statesSet = new Set<StoreAtom<any>>();
@@ -25,12 +25,13 @@ export const createAtom = <TInitial, TMethods>(
   methods?: (
     set: (newValue: Partial<TInitial>) => void,
     states: TInitial,
-    get: <T>(atom: Atom<T>) => T
-  ) => TMethods
+    get: <T>(atom: Atom<T>) => T,
+  ) => TMethods,
 ): [() => UseAtom<TInitial, TMethods>, StoreAtom<TInitial>] => {
-  const storeAtom = atom(initial);
+  const storeAtom = atom(initial) as StoreAtom<TInitial>;
   statesSet.add(storeAtom);
   (storeAtom as any).reformName = "store-" + statesSet.size;
+
   function useAtom(): UseAtom<TInitial, TMethods> {
     const [states, setStates] = useJotaiAtom(storeAtom);
     const store = useStore();
@@ -38,7 +39,7 @@ export const createAtom = <TInitial, TMethods>(
     const methodsObj = methods?.(
       (newValue: Partial<TInitial>) => setStates(newValue as TInitial),
       states,
-      <T>(atom: Atom<T>) => store.get<T>(atom)
+      <T>(atom: Atom<T>) => store.get<T>(atom),
     );
 
     return [
